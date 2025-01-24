@@ -6,8 +6,11 @@ export type Mytype = {
   id: number;
   video: "false" | "true";
   genres: string;
+  name: string;
+  adult: boolean;
 };
 export type Mygenre = {
   name: string;
   id: number;
+  adult: boolean;
 };
