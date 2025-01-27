@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/popover";
 import { ModeToggle } from "./Modetoggle";
 import Buttons from "./Button";
+import { Inpit } from "./Inputs";
 
 export default function Header() {
   return (
@@ -29,7 +30,7 @@ export default function Header() {
       </div>
 
       <div className="flex gap-5 ">
-        <Input placeholder="Search" className="w-[379px]" />
+        <Inpit />
       </div>
       <div>
         <ModeToggle />

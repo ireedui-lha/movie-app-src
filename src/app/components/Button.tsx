@@ -13,7 +13,7 @@ export default async function Buttons() {
     }
   );
   const data = await response.json();
-  console.log(data);
+
   return (
     <div className="flex flex-wrap gap-4">
       {data.genres?.map((genre: Mygenre, index: number) => {

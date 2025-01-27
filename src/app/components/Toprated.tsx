@@ -21,29 +21,33 @@ export default async function Toprated() {
   };
   const data = await response.json();
   return (
-    <div className="max-w-[1280px] m-auto">
-      <div className="flex justify-between ">
-        <h1 className="text-3xl font-bold">Top_rated</h1>
-        <Link href="/product-detail/3">See more...</Link>{" "}
+    <div className="">
+      <div className="flex max-w-[1280px] m-auto justify-between h-[59px]">
+        <h1 className="text-3xl">Toprated</h1>
+        <Link href={"/toprated"}>seemore..</Link>
       </div>
+      <div className="flex justify-between "></div>
 
       <div className="flex flex-wrap max-w-[1280px] gap-[32px] m-auto  ">
         {data.results.slice(0, 10).map((movie: any, index: any) => {
           return (
-            <div key={index} className="rounded-[20px] overflow-hidden">
-              <img
-                className="w-[230px] h-[300px]"
-                src={"https://image.tmdb.org/t/p/w500/" + movie?.poster_path}
-                alt=""
-              />
-              <div className=" h-[79px] w-[230px]   ">
-                <div className="flex">
-                  <Star className="fill-current h-4 mt-1" />
-                  <p>{butarhai(movie?.vote_average)}/10</p>
+            <Link href={`/product-detail/${movie.id}`}>
+              {" "}
+              <div key={index} className="rounded-[20px] overflow-hidden">
+                <img
+                  className="w-[230px] h-[300px]"
+                  src={"https://image.tmdb.org/t/p/w500/" + movie?.poster_path}
+                  alt=""
+                />
+                <div className=" h-[79px] w-[230px]   ">
+                  <div className="flex">
+                    <Star className="fill-current h-4 mt-1" />
+                    <p>{butarhai(movie?.vote_average)}/10</p>
+                  </div>
+                  <p className="font-bold"> {movie?.original_title}</p>
                 </div>
-                <p className="font-bold"> {movie?.original_title}</p>
               </div>
-            </div>
+            </Link>
           );
         })}
       </div>

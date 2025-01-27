@@ -1,5 +1,7 @@
+import { PaginationDemo } from "@/app/components/Next";
 import { Mytype } from "@/components/util/Mytype";
 import { Star } from "lucide-react";
+import Link from "next/link";
 
 export default async function Next({
   params: { movieid },
@@ -27,10 +29,21 @@ export default async function Next({
       },
     }
   );
+  const plum = await fetch(
+    `https://api.themoviedb.org/3/movie/${movieid}/similar?language=en-US&page=1`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  const Sum = await plum.json();
+  console.log(Sum);
   const free = await star.json();
-  console.log(free);
+  // console.log(free);
   const data = await response.json();
-  console.log(data);
+  // console.log(data);
 
   const butarhai = (too: number) => {
     return Math.floor((too * 10) / 10)
@@ -65,8 +78,19 @@ export default async function Next({
           );
         })}
       </div>
-      <div className="flex justify-between">
+
+      <div className="flex gap-20">
         <p>Director</p>
+        {free.crew
+          ?.filter((crew: Mytype) => crew.department == "Directing")
+          .slice(0, 1)
+          .map((crew: Mytype, id: number) => {
+            return (
+              <div>
+                <p>{crew.name}</p>
+              </div>
+            );
+          })}
       </div>
       <div className="flex gap-20 ">
         <p>Stars</p>
@@ -79,6 +103,34 @@ export default async function Next({
       <p className=" border-2 h-[1px]"></p>
 
       {data.overview}
+      <div className="flex max-w-[1280px] m-auto justify-between h-[59px]">
+        <h1 className="text-3xl">More this like</h1>
+        <Link href={`/similar-detail/${movieid}`}>Seemore...</Link>
+      </div>
+      <div className="flex gap-3 flex-wrap">
+        {Sum.results?.slice(0, 5).map((movie: Mytype, index: number) => {
+          return (
+            <Link href={`/product-detail/${movie.id}`}>
+              {" "}
+              <div key={index} className=" rounded-[20px] overflow-hidden ">
+                <img
+                  className=" w-[230px] h-[340px]"
+                  src={"https://image.tmdb.org/t/p/w500/" + movie?.poster_path}
+                  alt=""
+                />
+                <div className=" h-[79px] w-[230px] ">
+                  <div className="flex">
+                    <Star className="fill-current h-4 mt-1" />
+                    <p>{butarhai(movie?.vote_average)}/10</p>
+                  </div>
+                  <p className="font-bold">{movie?.original_title}</p>
+                </div>
+              </div>
+            </Link>
+          );
+        })}
+      </div>
+      <PaginationDemo />
     </div>
   );
 }

@@ -8,6 +8,7 @@ export type Mytype = {
   genres: string;
   name: string;
   adult: boolean;
+  department: string;
 };
 export type Mygenre = {
   name: string;

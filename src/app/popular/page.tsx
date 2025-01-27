@@ -17,19 +17,21 @@ export default async function page() {
   const data = await response.json();
   return (
     <div>
-      <Header />
       <div className="grid grid-cols-5 max-w-[1280px] gap-[32px] m-auto  ">
         {data.results.map((movie: any, index: any) => {
           return (
-            <div key={index} className="rounded-sm overflow-hidden">
-              <img
-                className="w-[230px] h-[300px]"
-                src={"https://image.tmdb.org/t/p/w500/" + movie?.poster_path}
-                alt=""
-              />
-              <p>{movie?.vote_average}</p>
-              {movie?.original_title}
-            </div>
+            <Link href={`/product-detail/${movie.id}`}>
+              {" "}
+              <div key={index} className="rounded-sm overflow-hidden">
+                <img
+                  className="w-[230px] h-[300px]"
+                  src={"https://image.tmdb.org/t/p/w500/" + movie?.poster_path}
+                  alt=""
+                />
+                <p>{movie?.vote_average}</p>
+                {movie?.original_title}
+              </div>
+            </Link>
           );
         })}
       </div>
