@@ -9,6 +9,7 @@ export type Mytype = {
   name: string;
   adult: boolean;
   department: string;
+  key: string;
 };
 export type Mygenre = {
   name: string;

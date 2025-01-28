@@ -19,12 +19,12 @@ export default function Header() {
       <div className="flex ">
         <Popover>
           <PopoverTrigger className="text-white">open</PopoverTrigger>
-          <PopoverContent>
+          <PopoverContent className="w-[577px] h-[350px]">
             <h1>Genres</h1>
             <p>See lists of movies by genre</p>
             <Buttons />
 
-            <div className="flex flex-wrap gap-3"></div>
+            <div className="flex flex-wrap gap-3 "></div>
           </PopoverContent>
         </Popover>
       </div>

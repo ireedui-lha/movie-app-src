@@ -1,5 +1,16 @@
 import { PaginationDemo } from "@/app/components/Next";
+
+import { Button } from "@/components/ui/button";
+import { DialogFooter, DialogHeader } from "@/components/ui/dialog";
+import Fetchdata from "@/components/util/fetchData";
+
 import { Mytype } from "@/components/util/Mytype";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTrigger,
+} from "@radix-ui/react-dialog";
 import { Star } from "lucide-react";
 import Link from "next/link";
 
@@ -8,6 +19,8 @@ export default async function Next({
 }: {
   params: { movieid: string };
 }) {
+  const trailer = `/movie/${movieid}/videos?language=en-US`;
+  const cometrailer = await Fetchdata(trailer);
   const token =
     "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0ZDVjNjBlOTdmYzQxNDVkNGIzZDlhMjk0NjVmZmEzZCIsIm5iZiI6MTczNzM0MjQxMi43MjUsInN1YiI6IjY3OGRiZGNjZTQ1NjYzOTlhMjZlMWEzZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Qig5T_JxICE_KQE6jl2ivbla8UZdUGdSJvm2xW-86NQ";
 
@@ -38,7 +51,19 @@ export default async function Next({
       },
     }
   );
+  const video = await fetch(
+    `https://api.themoviedb.org/3/movie/${movieid}/similar?language=en-US&page=1`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  const grim = await video.json();
+  console.log(grim);
   const Sum = await plum.json();
+
   console.log(Sum);
   const free = await star.json();
   // console.log(free);
@@ -59,18 +84,63 @@ export default async function Next({
           <p>{butarhai(data.vote_average)}/10</p>
         </div>
       </div>
+      <p>{data.release_date}</p>
 
-      <div>
-        <p>{data.release_date}</p>
+      <div className="flex gap-10 relative">
         {/* <p>{?data.adult:"png":"sv"}</p> */}
         <img
           className="w-[290px] h-[428px] "
           src={"https://image.tmdb.org/t/p/w500/" + data.poster_path}
           alt=""
         />
+
+        <Dialog>
+          <DialogTrigger
+            asChild
+            className="w-[760px] h-[428px] absolute left-[400px]  "
+          >
+            <Button variant="outline">play player</Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogDescription></DialogDescription>
+            </DialogHeader>
+            <div
+              style={{
+                backgroundImage: data?.poster_path
+                  ? `url(https://image.tmdb.org/t/p/original${data?.poster_path})`
+                  : `url('/path-to-placeholder.jpg')`,
+              }}
+            ></div>
+
+            <iframe
+              className="absolute bottom-[50px] right-[150px] w-[500px] h-[300px]  "
+              src={`https://www.youtube.com/embed/${cometrailer.results[0].key}`}
+              title={`https://www.youtube.com/embed/${cometrailer.results[0].original_title}`}
+            ></iframe>
+            {}
+
+            <div className="grid gap-4 py-4 h-[]">
+              {/* <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="name" className="text-right">
+              Name
+            </Label>
+            <Input id="name" value="Pedro Duarte" className="col-span-3" />
+          </div> */}
+              {/* <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="username" className="text-right">
+              Username
+            </Label>
+            <Input id="username" value="@peduarte" className="col-span-3" />
+          </div> */}
+            </div>
+            <DialogFooter></DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
+
       <div className="flex font-bold gap-4 ">
-        {data.genres.map((genre: any, index: any) => {
+        {data.genres?.map((genre: any, index: any) => {
           return (
             <div key={index}>
               <p>{genre.name}</p>
@@ -95,7 +165,7 @@ export default async function Next({
       <div className="flex gap-20 ">
         <p>Stars</p>
         <div className="flex gap-10">
-          {free.cast.slice(0, 5).map((actor: Mytype, index: any) => {
+          {free.cast?.slice(0, 5).map((actor: Mytype, index: any) => {
             return <p key={index}>{actor.name}</p>;
           })}
         </div>
@@ -118,6 +188,7 @@ export default async function Next({
                   src={"https://image.tmdb.org/t/p/w500/" + movie?.poster_path}
                   alt=""
                 />
+
                 <div className=" h-[79px] w-[230px] ">
                   <div className="flex">
                     <Star className="fill-current h-4 mt-1" />
