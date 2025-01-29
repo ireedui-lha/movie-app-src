@@ -8,14 +8,18 @@ import {
 import { ModeToggle } from "./Modetoggle";
 import Buttons from "./Button";
 import { Inpit } from "./Inputs";
+import Link from "next/link";
 
 export default function Header() {
   return (
     <div className="flex justify-between sticky top-0  w-[100vw] p-[16px] h-[59px]">
-      <div className="flex gap-5">
-        <img src="./film.png" alt="" />
-        <h1 className="text-[#4338CA] font-bold text-[20px]">Movie Z</h1>
-      </div>
+      <Link href={"/"}>
+        <div className="flex gap-5">
+          <img src="./film.png" alt="" />
+          <h1 className="text-[#4338CA] font-bold text-[20px]">Movie Z</h1>
+        </div>
+      </Link>
+
       <div className="flex ">
         <Popover>
           <PopoverTrigger className="text-white">open</PopoverTrigger>

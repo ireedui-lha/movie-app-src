@@ -10,6 +10,8 @@ export type Mytype = {
   adult: boolean;
   department: string;
   key: string;
+  total_pages: any;
+  backdrop_path: string;
 };
 export type Mygenre = {
   name: string;

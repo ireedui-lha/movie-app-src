@@ -1,13 +1,12 @@
 import Image from "next/image";
 import Header from "./components/Header";
-import Popular from "./components/Popular";
+
 import Upcoming from "./components/Upcoming";
+
+import { useState } from "react";
 import Toprated from "./components/Toprated";
 import { CarouselDemo } from "./components/Cover";
-import Button from "./components/Button";
-import Buttons from "./components/Button";
-import { PaginationDemo } from "./components/Next";
-import { useState } from "react";
+import Popular from "./components/Popular";
 
 export default async function Home() {
   // const [next, setNext] = useState();

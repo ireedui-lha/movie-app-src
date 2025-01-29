@@ -58,10 +58,6 @@ export default async function Page({
       </div>
       <div>
         <div className="max-w-[1280px] m-auto">
-          <div className="flex max-w-[1280px] m-auto justify-between h-[59px]">
-            <h1 className="text-3xl">Popular</h1>
-            <Link href={"/popular"}>seemore..</Link>
-          </div>
           <div className="flex justify-between "></div>
           <div className="flex flex-wrap max-w-[1280px] gap-[32px] m-auto">
             {genredata.results?.map((movie: Mytype, index: number) => {

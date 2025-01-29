@@ -1,7 +1,11 @@
 import { PaginationDemo } from "@/app/components/Next";
 
 import { Button } from "@/components/ui/button";
-import { DialogFooter, DialogHeader } from "@/components/ui/dialog";
+import {
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import Fetchdata from "@/components/util/fetchData";
 
 import { Mytype } from "@/components/util/Mytype";
@@ -89,8 +93,8 @@ export default async function Next({
       <div className="flex gap-10 relative">
         {/* <p>{?data.adult:"png":"sv"}</p> */}
         <img
-          className="w-[290px] h-[428px] "
-          src={"https://image.tmdb.org/t/p/w500/" + data.poster_path}
+          className="w-[290px] h-[428px] relative "
+          src={"https://image.tmdb.org/t/p/w500/" + data?.poster_path}
           alt=""
         />
 
@@ -102,21 +106,20 @@ export default async function Next({
             <Button variant="outline">play player</Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px]">
+            <DialogTitle></DialogTitle>
             <DialogHeader>
               <DialogDescription></DialogDescription>
             </DialogHeader>
-            <div
-              style={{
-                backgroundImage: data?.poster_path
-                  ? `url(https://image.tmdb.org/t/p/original${data?.poster_path})`
-                  : `url('/path-to-placeholder.jpg')`,
-              }}
-            ></div>
+            <div className="absolute">
+              <img
+                src={"https://image.tmdb.org/t/p/w500/" + data?.backdrop_path}
+                alt=""
+              />
+            </div>
 
             <iframe
               className="absolute bottom-[50px] right-[150px] w-[500px] h-[300px]  "
-              src={`https://www.youtube.com/embed/${cometrailer.results[0].key}`}
-              title={`https://www.youtube.com/embed/${cometrailer.results[0].original_title}`}
+              src={`https://www.youtube.com/embed/${cometrailer?.results[0].key}`}
             ></iframe>
             {}
 
@@ -201,7 +204,6 @@ export default async function Next({
           );
         })}
       </div>
-      <PaginationDemo />
     </div>
   );
 }
