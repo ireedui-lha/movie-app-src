@@ -110,7 +110,7 @@ export default async function Next({
             <DialogHeader>
               <DialogDescription></DialogDescription>
             </DialogHeader>
-            <div className="absolute">
+            <div className="absolute  ">
               <img
                 src={"https://image.tmdb.org/t/p/w500/" + data?.backdrop_path}
                 alt=""

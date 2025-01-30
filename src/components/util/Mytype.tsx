@@ -12,6 +12,7 @@ export type Mytype = {
   key: string;
   total_pages: any;
   backdrop_path: string;
+  total: number;
 };
 export type Mygenre = {
   name: string;

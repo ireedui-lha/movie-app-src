@@ -34,18 +34,22 @@ export function Inpit() {
       />
       {values.slice(0, 5).map((movie: Mytype, index: number) => {
         return (
-          <div className="flex flex-col">
-            <Link href={`/product-detail/${movie.id}`}>
-              <div className="bg-white ">
-                <img
-                  className="h-[100px] w-[67px]"
-                  src={`https://image.tmdb.org/t/p/w500/` + movie.poster_path}
-                  alt=""
-                />
-                <button key={index}>{movie?.original_title}</button>
-                <p>{search}</p>
-              </div>
-            </Link>
+          <div>
+            {" "}
+            <div className="flex flex-col">
+              <Link href={`/product-detail/${movie.id}`}>
+                <div className="bg-white ">
+                  <img
+                    className="h-[100px] w-[67px]"
+                    src={`https://image.tmdb.org/t/p/w500/` + movie.poster_path}
+                    alt=""
+                  />
+                  <button key={index}>{movie?.original_title}</button>
+                  <p>{search}</p>
+                </div>
+              </Link>
+            </div>
+            <p>dhuis</p>
           </div>
         );
       })}

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Header from "../components/Header";
-import { PaginationDemo } from "../components/Next";
+import PaginationDemo from "../components/Next";
 
 export default async function page() {
   const token =
@@ -35,7 +35,7 @@ export default async function page() {
             </Link>
           );
         })}
-        <PaginationDemo />
+        <PaginationDemo currentPage={Number(page)} />
       </div>
     </div>
   );

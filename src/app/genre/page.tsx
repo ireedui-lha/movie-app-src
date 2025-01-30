@@ -1,3 +1,9 @@
+import Home from "./[genreid]/page";
+
 export default function Page() {
-  return <div>hha</div>;
+  return (
+    <div>
+      <Home />
+    </div>
+  );
 }

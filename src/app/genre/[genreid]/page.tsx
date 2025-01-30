@@ -1,8 +1,9 @@
+import PaginationDemo from "@/app/components/Next";
 import { Mygenre, Mytype } from "@/components/util/Mytype";
 import { Star } from "lucide-react";
 import Link from "next/link";
 
-export default async function Page({
+export default async function Home({
   params: { genreid },
 }: {
   params: { genreid: string };
