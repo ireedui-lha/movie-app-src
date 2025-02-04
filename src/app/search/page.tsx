@@ -52,29 +52,25 @@ export default function Genre() {
     data();
   }, []);
   return (
-    <div>
-      <div className="w-[1280px] flex m-auto gap-10">
-        <h1>search Filter</h1>
-        <p>Genres</p>
-        <div className="  w-[400px]  border-r-2  flex flex-wrap  justify-start items-start mt-[200px] ">
-          <ToggleGroupDemo genres={genre} />
-        </div>
-        <div className="flex w-[880px] flex-wrap gap-4 mt-[200px] ">
-          {movie.map((movie: Mytype, index: number) => {
-            return (
-              <div key={index} className="w-[165px] h-[277px]">
-                <img
-                  className="w-[165px] h-[244px]"
-                  src={"https://image.tmdb.org/t/p/w500/" + movie?.poster_path}
-                  alt=""
-                />
-                <p>{movie.original_title}</p>
-                <p> {movie?.total_results}</p>
-              </div>
-            );
-          })}
-        </div>
-      </div>{" "}
+    <div className="w-[1280px] flex m-auto">
+      <div className="  w-[400px]  border-r-2 ">
+        <ToggleGroupDemo genres={genre} />
+      </div>
+      <div className="flex w-[880px] flex-wrap gap-4  ">
+        {movie.map((movie: Mytype, index: number) => {
+          return (
+            <div key={index} className="">
+              <img
+                className="w-[165px] h-[244px]"
+                src={"https://image.tmdb.org/t/p/w500/" + movie?.poster_path}
+                alt=""
+              />
+              <p>{movie.original_title}</p>
+              <p> {movie?.total_results}</p>
+            </div>
+          );
+        })}
+      </div>
       <PaginationDemo />
     </div>
   );

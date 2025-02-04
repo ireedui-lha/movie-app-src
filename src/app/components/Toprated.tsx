@@ -24,7 +24,7 @@ export default async function Toprated() {
     <div className="">
       <div className="flex max-w-[1280px] m-auto justify-between h-[59px]">
         <h1 className="text-3xl">Toprated</h1>
-        <Link href={"/toprated"}>seemore..</Link>
+        <Link href={"/toprated"}>See more...</Link>
       </div>
       <div className="flex justify-between "></div>
 

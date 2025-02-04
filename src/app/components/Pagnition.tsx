@@ -1,4 +1,3 @@
-"use client";
 import {
   Pagination,
   PaginationContent,
@@ -8,49 +7,42 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { Mytype } from "@/components/util/Mytype";
-import next from "next";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-
+import { useParams, useSearchParams } from "next/navigation";
 import { useState } from "react";
+import page from "../popular/page";
 
-export default function PaginationDemo({
-  currentPage,
-}: {
-  currentPage: number;
-  total: number;
-}) {
-  const router = useRouter();
-  const nexthandler = (page: number) => {
-    router.push(`/page?page${page}`);
-  };
-
+export function PaginationDemo() {
+  const searchparams = useSearchParams();
+  const genre = searchparams.get("genreIds");
+  const page = searchparams.get("page");
+  const thirdpage = searchparams.get("page");
   return (
     <Pagination>
       <PaginationContent>
         <PaginationItem>
-          <PaginationPrevious
-            onClick={() => nexthandler(currentPage - 1)}
-            href="#"
-          />
+          <PaginationPrevious href="#" />
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink onClick={() => nexthandler(currentPage - 1)} href="#">
+          <PaginationLink
+            href={"genre?" + "genreIds" + genre + "&page=1"}
+            isActive={page == "1"}
+          >
             1
           </PaginationLink>
         </PaginationItem>
         <PaginationItem>
           <PaginationLink
-            onClick={() => nexthandler(currentPage - 1)}
-            href="#"
-            isActive
+            href={"genre?" + "genreIds" + genre + "&pag=2"}
+            isActive={page == "2"}
           >
             2
           </PaginationLink>
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink onClick={() => nexthandler(currentPage - 1)} href="#">
+          <PaginationLink
+            href={"genre?" + "genreIds" + genre + "&page=3"}
+            isActive={thirdpage == "3"}
+          >
             3
           </PaginationLink>
         </PaginationItem>

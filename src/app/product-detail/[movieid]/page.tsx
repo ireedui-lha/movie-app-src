@@ -1,5 +1,3 @@
-import { PaginationDemo } from "@/app/components/Next";
-
 import { Button } from "@/components/ui/button";
 import {
   DialogFooter,
@@ -97,62 +95,51 @@ export default async function Next({
           src={"https://image.tmdb.org/t/p/w500/" + data?.poster_path}
           alt=""
         />
+        <div>
+          {" "}
+          <div className="relative  ">
+            <img
+              className="w-[760px] h-[428px] "
+              src={"https://image.tmdb.org/t/p/w500/" + data?.backdrop_path}
+              alt=""
+            />
+          </div>
+          <Dialog>
+            <DialogTrigger asChild className=" ">
+              <Button variant="outline">play player</Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]">
+              <DialogTitle></DialogTitle>
+              <DialogHeader>
+                <DialogDescription></DialogDescription>
+              </DialogHeader>
 
-        <Dialog>
-          <DialogTrigger
-            asChild
-            className="w-[760px] h-[428px] absolute left-[400px]  "
-          >
-            <Button variant="outline">play player</Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px]">
-            <DialogTitle></DialogTitle>
-            <DialogHeader>
-              <DialogDescription></DialogDescription>
-            </DialogHeader>
-            <div className="absolute  ">
-              <img
-                src={"https://image.tmdb.org/t/p/w500/" + data?.backdrop_path}
-                alt=""
-              />
-            </div>
+              <iframe
+                className="absolute bottom-[50px] right-[150px] w-[500px] h-[300px]  "
+                src={`https://www.youtube.com/embed/${cometrailer?.results[0]?.key}`}
+              ></iframe>
+              {}
 
-            <iframe
-              className="absolute bottom-[50px] right-[150px] w-[500px] h-[300px]  "
-              src={`https://www.youtube.com/embed/${cometrailer?.results[0].key}`}
-            ></iframe>
-            {}
-
-            <div className="grid gap-4 py-4 h-[]">
-              {/* <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              Name
-            </Label>
-            <Input id="name" value="Pedro Duarte" className="col-span-3" />
-          </div> */}
-              {/* <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
-              Username
-            </Label>
-            <Input id="username" value="@peduarte" className="col-span-3" />
-          </div> */}
-            </div>
-            <DialogFooter></DialogFooter>
-          </DialogContent>
-        </Dialog>
+              <div className="grid gap-4 py-4 h-[]"></div>
+              <DialogFooter></DialogFooter>
+            </DialogContent>
+          </Dialog>
+        </div>
       </div>
 
       <div className="flex font-bold gap-4 ">
         {data.genres?.map((genre: any, index: any) => {
           return (
             <div key={index}>
-              <p>{genre.name}</p>
+              <div className="border-[0.5px] rounded-[15px] w-[80px] flex items-center justify-center ">
+                <p>{genre.name}</p>
+              </div>
             </div>
           );
         })}
       </div>
-
-      <div className="flex gap-20">
+      <div className="mt-[12px]">{data.overview}</div>
+      <div className="flex gap-20 mt-[15px]">
         <p>Director</p>
         {free.crew
           ?.filter((crew: Mytype) => crew.department == "Directing")
@@ -165,18 +152,23 @@ export default async function Next({
             );
           })}
       </div>
-      <div className="flex gap-20 ">
-        <p>Stars</p>
+
+      <div className=" border-b-[0.3px] mt-[12px]"></div>
+      <div className="flex gap-20  mt-[12px]">
+        <p className="">Stars</p>
         <div className="flex gap-10">
           {free.cast?.slice(0, 5).map((actor: Mytype, index: any) => {
-            return <p key={index}>{actor.name}</p>;
+            return (
+              <p key={index} className="">
+                {actor.name}
+              </p>
+            );
           })}
         </div>
       </div>
-      <p className=" border-2 h-[1px]"></p>
+      <div className=" border-b-[0.3px] mt-[10px]"></div>
 
-      {data.overview}
-      <div className="flex max-w-[1280px] m-auto justify-between h-[59px]">
+      <div className="flex max-w-[1280px] m-auto justify-between h-[59px] mt-[35px]">
         <h1 className="text-3xl">More this like</h1>
         <Link href={`/similar-detail/${movieid}`}>Seemore...</Link>
       </div>

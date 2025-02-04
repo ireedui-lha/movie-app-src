@@ -26,7 +26,7 @@ export default async function Upcoming() {
     <div className="max-w-[1280px] m-auto">
       <div className="flex max-w-[1280px] m-auto justify-between h-[59px]">
         <h1 className="text-3xl">Upcoming</h1>
-        <Link href={"/upcoming"}>seemore..</Link>
+        <Link href={"/upcoming"}>See more...</Link>
       </div>
       <div className="flex justify-between "></div>
 

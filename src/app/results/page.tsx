@@ -5,13 +5,16 @@ import React, { useState } from "react";
 import ToggleGroupDemo from "../components/Togglegroup";
 import { Mytype } from "@/components/util/Mytype";
 import { PaginationDemo } from "../components/Pagnition";
+import Resultstoggle from "../components/Resultstoggle";
 
 export default function Genre() {
   const [movie, setMovie] = React.useState<any>([]);
-  const [genre, setGenre] = React.useState<{ id: string; name: string }[]>([]);
+  const [genre, setGenre] = React.useState<{ value: string; name: string }[]>(
+    []
+  );
   const searchParams = useSearchParams();
-  console.log(searchParams);
-  const genreId = searchParams.get("genreIds");
+
+  const genreId = searchParams.get("genreValue");
   const page = searchParams.get("page") || 1;
   React.useEffect(() => {
     const responce = async () => {
@@ -56,9 +59,7 @@ export default function Genre() {
       <div className="w-[1280px] flex m-auto gap-10">
         <h1>search Filter</h1>
         <p>Genres</p>
-        <div className="  w-[400px]  border-r-2  flex flex-wrap  justify-start items-start mt-[200px] ">
-          <ToggleGroupDemo genres={genre} />
-        </div>
+
         <div className="flex w-[880px] flex-wrap gap-4 mt-[200px] ">
           {movie.map((movie: Mytype, index: number) => {
             return (
@@ -73,6 +74,9 @@ export default function Genre() {
               </div>
             );
           })}
+        </div>
+        <div className="  w-[400px]  border-r-2  flex flex-wrap  justify-start items-start mt-[200px] ">
+          <Resultstoggle genres={genre} />
         </div>
       </div>{" "}
       <PaginationDemo />

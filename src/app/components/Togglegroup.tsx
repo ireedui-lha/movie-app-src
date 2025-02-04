@@ -1,21 +1,22 @@
 "use client";
-import { Mygenre, Mytype } from "@/components/util/Mytype";
-import Link from "next/link";
-import ToggleGroupDemo from "./Togglegroup";
-import Genre from "../genre/page";
+import { Bold, Italic, Underline } from "lucide-react";
+
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { useRouter } from "next/navigation";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
-export default function Buttons({ data }: { data: Mygenre[] }) {
-  const rounter = useRouter();
+function ToggleGroupDemo({
+  genres,
+}: {
+  genres: { id: string; name: string }[];
+}) {
+  const { push } = useRouter();
   const handleclick = (select: string[]) => {
-    rounter.push(`/genre/14?genreIds=${select}`);
+    push(`/genre/14?genreIds=${select}`);
   };
   return (
     <ToggleGroup type="multiple" onValueChange={handleclick}>
       <div className=" ">
-        {data?.map((genre: Mygenre, index: number) => {
+        {genres?.map((genre) => {
           return (
             <ToggleGroupItem
               key={genre.id}
@@ -23,7 +24,6 @@ export default function Buttons({ data }: { data: Mygenre[] }) {
               aria-label="Toggle bold"
             >
               {genre.name}
-              <ChevronRight />
             </ToggleGroupItem>
           );
         })}
@@ -31,3 +31,4 @@ export default function Buttons({ data }: { data: Mygenre[] }) {
     </ToggleGroup>
   );
 }
+export default ToggleGroupDemo;

@@ -24,9 +24,9 @@ export default async function Popular() {
 
   return (
     <div className="max-w-[1280px] m-auto">
-      <div className="flex max-w-[1280px] m-auto justify-between h-[59px]">
+      <div className="flex max-w-[1280px] m-auto justify-between h-[59px] mt-[20px]">
         <h1 className="text-3xl">Popular</h1>
-        <Link href={"/popular"}>seemore..</Link>
+        <Link href={"/popular"}>See more...</Link>
       </div>
       <div className="flex justify-between "></div>
       <div className="flex flex-wrap max-w-[1280px] gap-[32px] m-auto">
@@ -34,7 +34,10 @@ export default async function Popular() {
           return (
             <Link href={`/product-detail/${movie.id}`}>
               {" "}
-              <div key={index} className=" rounded-[20px] overflow-hidden ">
+              <div
+                key={index}
+                className=" rounded-[20px] overflow-hidden h-[439px] w-[230px] bg-secondary"
+              >
                 <img
                   className=" w-[230px] h-[340px]"
                   src={"https://image.tmdb.org/t/p/w500/" + movie?.poster_path}

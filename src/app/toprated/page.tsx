@@ -1,4 +1,5 @@
 import { Mytype } from "@/components/util/Mytype";
+import { Star } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -28,6 +29,11 @@ export default async function page() {
                 alt=""
               />
             </div>
+            <div className="flex">
+              <Star className="fill-current h-4 mt-1" />
+              <p>{movie?.vote_average}</p>
+            </div>
+            <p className="font-bold">{movie?.original_title}</p>
           </Link>
         );
       })}

@@ -27,7 +27,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/app/page/[valueid]"
+    "src/app/value/[valueid]"
   ],
   "exclude": ["node_modules"]
 }

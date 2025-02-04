@@ -10,6 +10,8 @@ import {
 } from "@/components/ui/carousel";
 import { Mytype } from "@/components/util/Mytype";
 import { Star } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
 
 export async function CarouselDemo() {
   const token =
@@ -31,31 +33,34 @@ export async function CarouselDemo() {
       .replace(",", ",");
   };
   return (
-    <Carousel className="w-[100%] m-auto ">
+    <Carousel className="w-[100%] m-auto  ">
       <CarouselContent>
         {data.results?.slice(0, 10).map((movie: Mytype, index: number) => (
           <CarouselItem key={index} className="relative h-[600px]">
-            <div
-              className="absolute inset-0 z-0 bg-cover bg-center "
-              style={{
-                backgroundImage: movie?.poster_path
-                  ? `url(https://image.tmdb.org/t/p/original${movie.poster_path})`
-                  : `url('/path-to-placeholder.jpg')`,
-              }}
-            >
-              <div className="absolute flex flex-col items-start gap-4 left-[140px] bottom-[165px] w-[404px] h-[264px]">
-                <p>Now Playing</p>
-                <p>{movie.original_title}</p>
-                <div className="flex">
-                  <Star className="fill-current h-4 mt-1" />
-                  <p>{butarhai(movie.vote_average)}</p>
-                  <p>/10</p>
-                </div>
+            <Link href="/">
+              {" "}
+              <div
+                className="absolute inset-0 z-0 bg-cover bg-center "
+                style={{
+                  backgroundImage: movie?.poster_path
+                    ? `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`
+                    : `url('/path-to-placeholder.jpg')`,
+                }}
+              >
+                <div className="absolute flex flex-col items-start gap-4 left-[140px] bottom-[165px] w-[404px] h-[264px] inset-0  ">
+                  <p>Now Playing</p>
+                  <p>{movie.original_title}</p>
+                  <div className="flex">
+                    <Star className="fill-current h-4 mt-1" />
+                    <p>{butarhai(movie.vote_average)}</p>
+                    <p>/10</p>
+                  </div>
 
-                <p>{movie.overview}</p>
-                {/* <h1>{movie.}</h1> */}
+                  <p>{movie.overview}</p>
+                  {/* <h1>{movie.}</h1> */}
+                </div>
               </div>
-            </div>
+            </Link>
 
             <Card>
               <CardContent className="flex aspect-square items-center justify-center p-6">

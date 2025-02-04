@@ -26,7 +26,7 @@ export default async function Home({
   const Sum = await plum.json();
   console.log(Sum);
   return (
-    <div className="flex flex-wrap gap-3">
+    <div className="w-[1280px] m-auto flex flex-wrap gap-3 mt-[30px]">
       {Sum.results?.map((movie: Mytype, index: number) => {
         return (
           <Link href={`/product-detail/${movie.id}`} key={index}>

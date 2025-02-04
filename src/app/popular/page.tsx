@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Header from "../components/Header";
 import PaginationDemo from "../components/Next";
+import { Star } from "lucide-react";
 
 export default async function page() {
   const token =
@@ -29,13 +30,15 @@ export default async function page() {
                   src={"https://image.tmdb.org/t/p/w500/" + movie?.poster_path}
                   alt=""
                 />
-                <p>{movie?.vote_average}</p>
-                {movie?.original_title}
+                <div className="flex">
+                  <Star className="fill-current h-4 mt-1" />
+                  <p>{movie?.vote_average}</p>
+                </div>
+                <p className="font-bold">{movie?.original_title}</p>
               </div>
             </Link>
           );
         })}
-        <PaginationDemo currentPage={Number(page)} />
       </div>
     </div>
   );
