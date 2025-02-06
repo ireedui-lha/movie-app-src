@@ -7,32 +7,40 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import page from "../popular/page";
 
-export function PaginationDemo() {
+export function PaginationDemo({ Max }: { Max: number }) {
+  const router = useRouter();
   const searchparams = useSearchParams();
   const genre = searchparams.get("genreIds");
-  const page = searchparams.get("page");
-  const thirdpage = searchparams.get("page");
+  const page = searchparams.get("page") || 1;
+
+  const paginate = (page: number) => {
+    router.push(`/genre/12?genreIds=${genre}&page=${page}`);
+  };
+
   return (
     <Pagination>
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious href="#" />
         </PaginationItem>
-        <PaginationItem>
+
+        {Array.from(Array(Max)).map((_: number, index: number) => {
+          return (
+            <PaginationItem key={index} onClick={() => paginate(index + 1)}>
+              <PaginationLink isActive={page == index + 1}>
+                {index + 1}
+              </PaginationLink>
+            </PaginationItem>
+          );
+        })}
+
+        {/* <PaginationItem>
           <PaginationLink
-            href={"genre?" + "genreIds" + genre + "&page=1"}
-            isActive={page == "1"}
-          >
-            1
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink
-            href={"genre?" + "genreIds" + genre + "&pag=2"}
+            href={"genre?" + "genreIds" + genre + "&page=2"}
             isActive={page == "2"}
           >
             2
@@ -45,7 +53,7 @@ export function PaginationDemo() {
           >
             3
           </PaginationLink>
-        </PaginationItem>
+        </PaginationItem> */}
         <PaginationItem>
           <PaginationEllipsis />
         </PaginationItem>

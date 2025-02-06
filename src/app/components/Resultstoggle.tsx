@@ -5,24 +5,20 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { useRouter } from "next/navigation";
 import { Genres, Mygenre, Mytype } from "@/components/util/Mytype";
 
-function Resultstoggle({
-  genres,
-}: {
-  genres: { value: string; name: string }[];
-}) {
+function Resultstoggle({ SearchValue }: { SearchValue: Mygenre[] }) {
   const { push } = useRouter();
   const handleclick = (select: string[]) => {
-    push(`genre/14?genreValue=${select}`);
+    push(`results/14?resultsValue=${select}`);
   };
 
   return (
     <ToggleGroup type="multiple" onValueChange={handleclick}>
       <div className=" ">
-        {genres?.map((genre) => {
+        {SearchValue?.map((genre: Mygenre, index: number) => {
           return (
             <ToggleGroupItem
-              key={genre.value}
-              value={genre.value}
+              key={index}
+              value={genre.id.toString()}
               aria-label="Toggle bold"
             >
               {genre.name}

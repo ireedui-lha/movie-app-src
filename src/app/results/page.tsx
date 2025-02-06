@@ -3,25 +3,24 @@
 import { useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 import ToggleGroupDemo from "../components/Togglegroup";
-import { Mytype } from "@/components/util/Mytype";
+import { Mygenre, Mytype } from "@/components/util/Mytype";
 import { PaginationDemo } from "../components/Pagnition";
 import Resultstoggle from "../components/Resultstoggle";
 
-export default function Genre() {
+export default function Results() {
   const [movie, setMovie] = React.useState<any>([]);
-  const [genre, setGenre] = React.useState<{ value: string; name: string }[]>(
-    []
-  );
+  const [genre, setGenre] = React.useState<Mygenre[]>([]);
+
   const searchParams = useSearchParams();
 
-  const genreId = searchParams.get("genreValue");
+  const SearchValue = searchParams.get("SearchValue");
   const page = searchParams.get("page") || 1;
   React.useEffect(() => {
     const responce = async () => {
       const token =
         "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0ZDVjNjBlOTdmYzQxNDVkNGIzZDlhMjk0NjVmZmEzZCIsIm5iZiI6MTczNzM0MjQxMi43MjUsInN1YiI6IjY3OGRiZGNjZTQ1NjYzOTlhMjZlMWEzZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Qig5T_JxICE_KQE6jl2ivbla8UZdUGdSJvm2xW-86NQ";
       const response = await fetch(
-        `https://api.themoviedb.org/3/discover/movie?language=en&with_genres=${genreId}&page=${page}`,
+        `https://api.themoviedb.org/3/search/movie?query=${SearchValue}&language=en-US&page=${page}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -31,10 +30,9 @@ export default function Genre() {
       );
       const res = await response.json();
       setMovie(res.results || []);
-      console.log(res);
     };
     responce();
-  }, [genreId, page]);
+  }, [SearchValue, page]);
   React.useEffect(() => {
     const data = async () => {
       const token =
@@ -49,11 +47,13 @@ export default function Genre() {
         }
       );
       const res = await responseData.json();
+
       setGenre(res.genres || []);
       console.log(res);
     };
     data();
   }, []);
+
   return (
     <div>
       <div className="w-[1280px] flex m-auto gap-10">
@@ -76,10 +76,9 @@ export default function Genre() {
           })}
         </div>
         <div className="  w-[400px]  border-r-2  flex flex-wrap  justify-start items-start mt-[200px] ">
-          <Resultstoggle genres={genre} />
+          <Resultstoggle SearchValue={genre} />
         </div>
       </div>{" "}
-      <PaginationDemo />
     </div>
   );
 }

@@ -1,19 +1,26 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import Fetchdata from "@/components/util/fetchData";
-import { Mytype } from "@/components/util/Mytype";
+import { Mygenre, Mytype } from "@/components/util/Mytype";
 
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@radix-ui/react-popover";
+import { Toggle } from "@radix-ui/react-toggle";
 import { Search, Star } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
-export function Inpit() {
+export function Inpit({ data }: { data: Mygenre }) {
+  const rounter = useRouter();
+  const handleclick = (select: string[]) => {
+    rounter.push(`/results/14?genreIds=${select}`);
+  };
   const [search, setSearch] = useState("");
   const [values, setvalues] = useState([]);
   const [open, setOpen] = useState(false);
@@ -77,13 +84,15 @@ export function Inpit() {
               </div>
             );
           })}
-          <div className="flex gap-3">
-            <Link href={`/results?value=${search}`}>
-              <p>See all results for </p>
-            </Link>
+          <Link href={`/results/?SearchValue=${search}`}>
+            <div className="flex gap-3">
+              <ToggleGroup type="multiple" onValueChange={handleclick}>
+                <Toggle>see</Toggle>
+              </ToggleGroup>
 
-            <p>"{search}"</p>
-          </div>
+              <p>"{search}"</p>
+            </div>
+          </Link>
         </PopoverContent>
       </Popover>
     </div>

@@ -15,11 +15,13 @@ export type Mytype = {
   total: number;
   total_results: any;
   release_date: string;
+  value: string;
 };
 export type Mygenre = {
   name: string;
   id: number;
   adult: boolean;
+  value: string;
 };
 export type Genres = {
   name: string;

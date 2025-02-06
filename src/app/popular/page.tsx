@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Header from "../components/Header";
-import PaginationDemo from "../components/Next";
+
 import { Star } from "lucide-react";
+import { PaginationDemo } from "../components/Pagnition";
 
 export default async function page() {
   const token =

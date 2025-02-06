@@ -10,7 +10,7 @@ export default function Genre() {
   const [movie, setMovie] = React.useState<any>([]);
   const [genre, setGenre] = React.useState<{ id: string; name: string }[]>([]);
   const searchParams = useSearchParams();
-  console.log(searchParams);
+
   const genreId = searchParams.get("genreIds");
   const page = searchParams.get("page") || 1;
   React.useEffect(() => {
@@ -28,7 +28,6 @@ export default function Genre() {
       );
       const res = await response.json();
       setMovie(res.results || []);
-      console.log(res);
     };
     responce();
   }, [genreId, page]);
@@ -59,12 +58,13 @@ export default function Genre() {
         <div className="  w-[400px]  border-r-2  flex flex-wrap  justify-start items-start mt-[200px] ">
           <ToggleGroupDemo genres={genre} />
         </div>
+        <p>{movie?.total_results}</p>
         <div className="flex w-[880px] flex-wrap gap-4 mt-[200px] ">
           {movie.map((movie: Mytype, index: number) => {
             return (
               <div key={index} className="w-[165px] h-[277px]">
                 <img
-                  className="w-[165px] h-[244px]"
+                  className="w-[165px] h-[244px] grid grid-rows-3"
                   src={"https://image.tmdb.org/t/p/w500/" + movie?.poster_path}
                   alt=""
                 />
@@ -74,8 +74,9 @@ export default function Genre() {
             );
           })}
         </div>
-      </div>{" "}
-      <PaginationDemo />
+      </div>
+
+      <PaginationDemo Max={10} />
     </div>
   );
 }
